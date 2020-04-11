@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "97630044028",
+    "firebase_url": "https://customfirebase-49bb9.firebaseio.com",
+    "project_id": "customfirebase-49bb9",
+    "storage_bucket": "customfirebase-49bb9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97630044028:android:003e68dc04c77bc5",
+        "android_client_info": {
+          "package_name": "com.example.him.flutter_ocr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97630044028-vltp1t6ia4mkq1a6094bfesdop4g87do.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmy-O80ir9aQPwEUS5d6csOB38gX45ATI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97630044028-vltp1t6ia4mkq1a6094bfesdop4g87do.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97630044028:android:471b619008cfd8df1feef9",
+        "android_client_info": {
+          "package_name": "com.mercury.barcodescanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97630044028-d0bij9hjo5qocuhr26om6t18ukksccl3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mercury.barcodescanner",
+            "certificate_hash": "63d28d64c6d23b8fff14e97ed08cf7ee4b065be5"
+          }
+        },
+        {
+          "client_id": "97630044028-vltp1t6ia4mkq1a6094bfesdop4g87do.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmy-O80ir9aQPwEUS5d6csOB38gX45ATI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97630044028-vltp1t6ia4mkq1a6094bfesdop4g87do.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
