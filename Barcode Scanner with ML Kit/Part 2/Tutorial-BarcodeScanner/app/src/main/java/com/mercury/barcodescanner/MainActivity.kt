@@ -3,6 +3,7 @@ package com.mercury.barcodescanner
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         barcodeViewModel = ViewModelProviders.of(this).get(BarcodeViewModel::class.java)
         scanBarcodeButton.setOnClickListener {
-            startActivity(Intent(this,BarcodeScannerActivity::class.java))
+            val intent = Intent(this,BarcodeScannerActivity::class.java)
+            startActivity(intent)
         }
         isData = intent.getBooleanExtra("fromScannerActivity",false)
         getContactsData()
@@ -31,12 +33,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun processData() {
-        barcodeViewModel.isAlreadyPresent( intent.getStringExtra("email") ?: "NA").observe(this,
-            Observer { emailCount ->
-                emailCount?.let {
-                    if(emailCount == 0) {
-                        addDataToDatabases()
-                    }
+        barcodeViewModel.isAlreadyPresentInFirebase(intent.getStringExtra("email") ?: "NA").observe(this,
+            Observer { isPresent->
+                Log.d("Data", isPresent.toString())
+                if (isPresent == 0){
+                    addDataToDatabases()
+                }else if(isPresent == -1){
+                    Toast.makeText(this,"Contact email already present in database",Toast.LENGTH_LONG).show()
+                } else {
+
                 }
             })
     }
@@ -52,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         barcodeViewModel.insertContact(contact = contact)
         barcodeViewModel.getSingleContact(email = contact.email).observe(this, Observer {roomContact ->
             roomContact?.let {
+                barcodeViewModel.getSingleContact(email = contact.email).removeObservers(this)
                 barcodeViewModel.addDataToFirebase(contact = roomContact)
             }
         })
@@ -67,8 +73,9 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, position: Int) {
-                barcodeViewModel.deleteDataFromFirebase(contactList[viewHolder.adapterPosition])
-                barcodeViewModel.deleteDataFromRoom(contactList[viewHolder.adapterPosition])
+                val swipedContact = contactList[viewHolder.adapterPosition]
+                barcodeViewModel.deleteDataFromRoom(swipedContact)
+                barcodeViewModel.deleteDataFromFirebase(swipedContact)
             }
         }
         val touchHelper = ItemTouchHelper(touchCallback)
@@ -76,7 +83,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getContactsData() {
-        barcodeViewModel.contactData.observe(this, Observer { contacts ->
+        barcodeViewModel.getDataFromFirebase().observe(this, Observer {contacts ->
             this.contactList = ArrayList(contacts)
             barcodeAdapter = BarcodeAdapter(contacts = contacts)
             recyclerView.layoutManager = LinearLayoutManager(this)

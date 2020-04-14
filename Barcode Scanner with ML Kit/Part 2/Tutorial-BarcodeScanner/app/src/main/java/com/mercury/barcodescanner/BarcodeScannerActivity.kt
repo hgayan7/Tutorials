@@ -111,6 +111,7 @@ class BarcodeScannerActivity : AppCompatActivity() {
                     intent.putExtra("url",barCodes.firstOrNull()?.contactInfo?.urls?.firstOrNull() ?: "NA")
                     intent.putExtra("organization",barCodes.firstOrNull()?.contactInfo?.organization ?: "NA")
                     intent.putExtra("phoneNo",barCodes.firstOrNull()?.contactInfo?.phones?.firstOrNull()?.number ?: "NA")
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                 }
             }
