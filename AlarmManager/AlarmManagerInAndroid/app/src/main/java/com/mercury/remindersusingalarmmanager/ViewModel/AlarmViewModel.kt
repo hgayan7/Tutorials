@@ -42,4 +42,10 @@ class AlarmViewModel(application: Application) : AndroidViewModel(application){
     fun insertAlarm(alarm: Alarm) = viewModelScope.launch(Dispatchers.IO) {
         alarmDatabase.alarmDAO().insertAlarm(alarm)
     }
+
+    fun deleteAlarm(alarm: Alarm) = viewModelScope.launch(Dispatchers.IO) {
+        var pendingIntent = PendingIntent.getBroadcast(getApplication(),alarm.requestCode,intent,0)
+        alarmDatabase.alarmDAO().deleteAlarm(alarm)
+        alarmManager?.cancel(pendingIntent)
+    }
 }

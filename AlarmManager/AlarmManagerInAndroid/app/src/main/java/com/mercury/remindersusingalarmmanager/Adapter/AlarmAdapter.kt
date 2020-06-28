@@ -8,11 +8,7 @@ import com.mercury.remindersusingalarmmanager.Database.Alarm
 import com.mercury.remindersusingalarmmanager.R
 import kotlinx.android.synthetic.main.alarm_cell.view.*
 
-
-/**
- * Created by Himshikhar Gayan.
- */
-class AlarmAdapter(private val alarms : List<Alarm>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AlarmAdapter(private val alarms: List<Alarm>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.alarm_cell, parent, false)
@@ -31,7 +27,7 @@ class AlarmAdapter(private val alarms : List<Alarm>) : RecyclerView.Adapter<Recy
     }
 
     class AlarmHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        fun bind(alarm : Alarm){
+        fun bind(alarm: Alarm){
             itemView.alarmTime.text = alarm.timing.toString()
         }
     }
